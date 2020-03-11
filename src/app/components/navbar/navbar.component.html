@@ -1,0 +1,179 @@
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-primary sticky fixed-top">
+  <div class="container-fluid">
+  <div class="navbar-wrapper">
+  <div class="navbar-toggle">
+  <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+  <span class="navbar-toggler-bar bar1"></span>
+  <span class="navbar-toggler-bar bar2"></span>
+  <span class="navbar-toggler-bar bar3"></span>
+  </button>
+  </div>
+  <img src="assets/img/zoom-team-logo.png" alt="ZoomTeams" style="width: 150px;">
+  <!-- <div class="ml-5">
+  <a _ngcontent-c12="" class="navbar-brand ml-5">{{title}}</a>
+  </div> -->
+  <!-- <a href="http://www.skycliffit.com" style="width:50px;height: 50px;" class="simple-text logo-normal">
+  ZoomTeams
+  </a> -->
+  </div>
+  <button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed"
+  aria-controls="collapseExample">
+  <span class="navbar-toggler-bar navbar-kebab"></span>
+  <span class="navbar-toggler-bar navbar-kebab"></span>
+  <span class="navbar-toggler-bar navbar-kebab"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+  <ul class="nav justify-content-end" *ngIf="dashboardMenu">
+
+  <li class="nav-item">
+  <a class="nav-link dropdata" [routerLink]="['/dashboard']"> <i class="fa fa-users" aria-hidden="true"></i>My
+  Dashboard</a>
+  </li>
+
+  <div class="vertical"></div>
+
+  <li class="nav-item">
+
+  <a class="nav-link dropdata" [routerLink]="['leave']"> <i class="fa fa-list" aria-hidden="true"></i>
+  Leave/Vacation Management</a>
+  </li>
+
+  <div class="vertical"></div>
+
+  <li class="nav-item">
+
+  <a class="nav-link dropdata" [routerLink]="['holidaylist']"><i class="fa fa-book" aria-hidden="true"></i>
+  Holidy List</a>
+  </li>
+  <div class="vertical"></div>
+  <li class="nav-item">
+  <a class="nav-link dropdata" href="#"><i class="fa fa-table" aria-hidden="true"></i> Organization Chart</a>
+  </li>
+  <!-- <li class="nav-item">
+  <a class="nav-link dropdata" [routerLink]="['/']"><i class="fa fa-sign-out-alt"></i> <p>Logout</p></a>
+  </li> -->
+  </ul>
+
+  <ul class="navbar-nav" *ngIf="settingMenu">
+  <li class="nav-item">
+  <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="router-link-active"
+  [routerLinkActiveOptions]={exact:true}>
+  <i class="fa fa-list" aria-hidden="true"></i>
+  <p>
+
+  </p>MyDashboard
+  </a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" (click)="Change()">
+  <i class="fa fa-book" aria-hidden="true"></i>
+  <p>
+
+  </p> My Article
+  </a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" href="#pablo" [routerLink]="['/add']" routerLinkActive="router-link-active"
+  [routerLinkActiveOptions]={exact:true}>
+  <i class="fa fa-table" aria-hidden="true"></i>
+  <p>
+
+  </p>
+  Add Article
+  </a>
+  </li>
+  <!-- <li class="nav-item">
+  <a class="nav-link dropdata" [routerLink]="['/']"><i class="fa fa-sign-out-alt"></i>
+  <p>Logout</p></a>
+  </li> -->
+  </ul>
+  <ul class="navbar-nav" *ngIf="leavemenu">
+  <li class="nav-item">
+  <div ngbDropdown>
+  <a class="dropdown-toggle nav-link" style="cursor: pointer;" role="button" ngbDropdownToggle>
+  <i class="fa fa-users"></i> Leaves
+  </a>
+
+  <div class="dropdown-menu" ngbDropdownMenu>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/holiday']">Holiday</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/search']">Locations</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/timesheet']">Employetimesheet</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/configuration']">Configuration</a>
+  </div>
+  </div>
+
+  </li>
+
+  </ul>
+  <ul class="navbar-nav" *ngIf="settings">
+  <li class="nav-item">
+
+  <div ngbDropdown>
+  <a class="dropdown-toggle nav-link" style="cursor: pointer;" role="button" ngbDropdownToggle>
+  <i class="fa fa-users"></i> Manage Organization & Users
+  </a>
+
+  <div class="dropdown-menu" ngbDropdownMenu>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/designation']">Designations</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/department']">Department</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/location']">Locations</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/organization']">Organizations</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/user']">Users</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/settings/document']">Document Type</a>
+  </div>
+  </div>
+
+  </li>
+  <li class="nav-item">
+  <a class="nav-link dropdata" href="#"><i class="fa fa-plus"></i>Create Project</a>
+  </li>
+
+  <li class="nav-item">
+  <a class="nav-link dropdata" [routerLink]="['/settings/timesheet']" href="#"><i class="fa fa-calendar"
+  aria-hidden="true"></i>Time Sheets</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link dropdata" href="#"><i class="fa fa-edit" aria-hidden="true"></i>Edit Projects</a>
+  </li>
+  <!-- <li class="nav-item">
+  <a class="nav-link dropdata" [routerLink]="['/']"><i class="fa fa-sign-out-alt"></i> <p>Logout</p></a>
+  </li> -->
+  </ul>
+
+  <ul class="navbar-nav" *ngIf="taskboards">
+  <li class="nav-item">
+
+  <div ngbDropdown>
+  <a class="dropdown-toggle nav-link" style="cursor: pointer;" role="button" ngbDropdownToggle>
+  <i class="now-ui-icons ui-1_settings-gear-63"></i> Tools
+  </a>
+
+  <div class="dropdown-menu" ngbDropdownMenu>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/taskboards/fields']">Fields</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/taskboards/securityroles']">Security Roles</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/taskboards/list']">List</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/taskboards/fieldtemplates']">Field Templates</a>
+  <a class='dropdown-item mobile-dropdown-item' [routerLink]="['/taskboards/notifications']">Notifications</a>
+  </div>
+  </div>
+
+  </li>
+
+
+
+
+  <li class="nav-item">
+  <a class="nav-link dropdata" (click)="logout()"><i class="fa fa-sign-out-alt"></i>
+  <p>Logout</p>
+  </a>
+  </li>
+  <li class="nav-item">
+  <!-- <a class="nav-link dropdata" [routerLink]="['/']"><i class="fa fa-sign-out-alt"></i> <p>Logout</p></a> -->
+  <!-- <p-dropdown [options]="profileuser" placeholder="user1" [routerLink]="['/profile']"></p-dropdown> -->
+  <img src="./assets/employeementalhealth.jpg" width="30" height="30"
+  style="border-radius: 50%;cursor:pointer;margin-top: 4px;" [routerLink]="['/profile']">
+  </li>
+  </ul>
+  </div>
+  </div>
+  </nav>

@@ -1,0 +1,261 @@
+<!-- <p-toolbar >
+  <div class="ui-toolbar-group-left">
+    <h5>My Profile</h5>
+  </div>
+</p-toolbar ><br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <p-card [style]="{width: '300px'}" class="col-md-3 border-left-primary">
+        <img src="Card" src="assets/employeementalhealth.jpg" width="250px" height="180px"   >
+        <h6 style="text-align: center;">Logged-in User</h6>
+        <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="100000" (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Change Profile"></p-fileUpload>
+
+      </p-card>
+    </div>
+<div class="col-lg-9">
+  <p-tabView class="col-md-7">
+    <p-tabPanel header="User Info" >
+        <p-table [value]="arr" >
+           <ng-template pTemplate="header">
+            <tr>
+              <th> Username</th>
+              <th>Fullname </th>
+              <th> E-mail</th>
+              <th> Desigantion</th>
+              <th> Phone no</th>
+              <th> Date of birth</th>
+              <th> Gender</th>
+              <th> Adress</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-Profile>
+            <tr>
+              <td>{{ Profile.username }}</td>
+
+          <td> {{ Profile.fullname}} </td>
+          <td> {{ Profile.email }} </td>
+          <td> {{ Profile.designation }} </td>
+          <td> {{ Profile.phoneno }} </td>
+          <td> {{ Profile.dateofbirth }} </td>
+          <td> {{ Profile.gender }} </td>
+          <td> {{ Profile.address }} </td>
+        </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+    <p-tabPanel header="Edit Info">
+ <div class="container">
+  <div class="row">
+    <form #f="ngForm" (ngSubmit)="onFormSubmit(f)">
+       <div class="ui-g-12">
+    <div class="row">
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <div class="">
+            <input name="username" class="form-control" [(ngModel)]="username" placeholder="Name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="description">Fullname</label>
+          <div class="">
+            <input  class="form-control" name="fullname" [(ngModel)]="fullname"    placeholder="Fullname"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="description">Email</label>
+          <div class="">
+            <input  class="form-control" name="email" [(ngModel)]="email"
+              placeholder="email"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="name">Designation</label>
+          <div class="">
+            <input  class="form-control" name="designation" [(ngModel)]="designation"  placeholder="designation"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="description">Phoneno</label>
+          <div class="">
+            <input   class="form-control" name="phoneno"[(ngModel)]="phoneno"      placeholder="phoneno"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="description">Date of birth</label>
+          <div class="">
+            <input    class="form-control" name="dateofbirth"[(ngModel)]="dateofbirth"        placeholder="Date of birth"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="name">Gender</label>
+          <div class="">
+            <input  class="form-control"  name="gender"[(ngModel)]="gender"  placeholder="Gender"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-4">
+        <div class="form-group">
+          <label for="description">Address</label>
+          <div class="">
+            <input  class="form-control"  name="address"[(ngModel)]="address"      placeholder="Address"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <button pButton label='Submit' (click)="onFormSubmit()"></button>
+   </form>
+        </div>
+        </div>
+
+    </p-tabPanel>
+  <p-tabPanel header="Change Password"  >
+      <div class="container">
+        <div class="row">
+          <form class="">
+           <div class="form-group">
+            <label> Current password <span class="text-danger">*</span></label>
+            <input type="text" pInputText class="form-control" />
+           </div>
+           <div class="form-group">
+            <label>New password  <span class="text-danger">*</span></label>
+            <input type="text" pInputText class="form-control"/>
+           </div>
+           <div class="form-group">
+            <label>Confirm password  <span class="text-danger">*</span></label>
+            <input type="text" pInputText class="form-control"/>
+           </div>
+           <button pButton label='Save'></button>
+          </form>
+        </div>
+      </div>
+    </p-tabPanel>
+</p-tabView>
+
+</div>
+    </div>
+
+    <div class="row">
+      <p-card [style]="{width: '300px'}" class="col-md-2">
+        <h6 style="text-align: center;">Leave Info</h6>
+      <p-table [value]="arr1" [responsive]="true">
+        <ng-template pTemplate="header">
+          <tr>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-leave>
+          <tr>
+            <td>
+              <span class="ui-column-title">Name</span>{{ leave.leavename }}
+            </td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+
+      </p-card>
+    </div>
+</div> -->
+<!-- <div class="container">
+<p-card  header="Profile edit"[style]="{width: '800px'}">
+<form>
+
+    <div class="row">
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">First Name</label>
+          <div class="">
+            <input name="First Name" class="form-control" placeholder="First Name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">Last Name</label>
+          <div class="">
+            <input name="lastname" class="form-control" placeholder="Last Name"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">Address</label>
+          <div class="">
+            <input name="address" class="form-control" placeholder="Address"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">Phone No</label>
+          <div class="">
+            <input name="phoneno" class="form-control" placeholder="Phone No"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">E-mail</label>
+          <div class="">
+            <input name="email" class="form-control" placeholder="E-mail"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="ui-md-6">
+        <div class="form-group">
+          <label for="name">Designation</label>
+          <div class="">
+            <input name="designation" class="form-control" placeholder="Designation"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+      <button pButton label='Save' ></button>
+    </div>
+
+</form>
+</p-card>
+
+</div> -->

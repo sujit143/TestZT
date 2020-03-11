@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name" : "Item Type",
+    "type": "List",
+    "format": "",
+    "flag": "True"
+  },
+  {
+    "id": 2,
+    "name" : "",
+    "type": "List",
+    "format": "",
+    "flag": "True"
+  },
+  {
+    "id": 3,
+    "name" : "",
+    "type": "List",
+    "format": "",
+    "flag": "True"
+  },
+  {
+    "id": 4,
+    "name" : "",
+    "type": "List",
+    "format": "",
+    "flag": "True"
+  }
+]

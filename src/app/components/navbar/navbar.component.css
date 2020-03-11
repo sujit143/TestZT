@@ -1,0 +1,22 @@
+.flex-spacer {
+  flex: 1 1 auto;
+}
+.li{
+  white-space: nowrap !important;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color:#022848 !important;
+}
+
+.navbar a.mobile-dropdown-item  {
+  color: black;
+}
+
+@media screen and (max-width: 991px) {
+  .navbar a.mobile-dropdown-item {
+    color: white;
+  }
+}

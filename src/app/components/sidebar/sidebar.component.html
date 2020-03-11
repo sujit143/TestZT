@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="sidebar" data-color="white" style="margin-top: 54px;">
+    <div class="logo">
+        <a>
+          <div class="">
+            <img src="http://qa.zoomteams.com/images/173423b5-f94f-4a66-9572-408ba1177efe.jpeg" class="rounded-circle"
+              alt="Cinque Terre" width="70px" height="70px">
+            <h6 style="text-align: center;"><b>Admin Manju</b></h6>
+            <h6 style="text-align: center;">Quality Analyst</h6>
+          </div>
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav" style="padding-bottom: 100%;">
+          <li *ngFor="let menuItem of menuItems; let i=index" class="{{menuItem.class}} nav-item"
+            [ngClass]="{'active': selectedIndex == i}" (click)="select(i)">
+            <a [routerLink]="[menuItem.path]" *ngIf="menuItem.title != 'Knowledge Base'">
+              <i class="now-ui-icons {{menuItem.icon}}"></i>
+              <p>{{menuItem.title}}</p>
+            </a>
+            <a (click)="navigateToUserprofile(i)" *ngIf="menuItem.title === 'Knowledge Base'"
+              [ngClass]="{'active': selectedIndex == i}">
+              <i class="now-ui-icons {{menuItem.icon}}"></i>
+              <p>{{menuItem.title}}</p>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+</div>

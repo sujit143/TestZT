@@ -1,0 +1,133 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-tab">
+            <mat-tab-group>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">work</mat-icon>
+                  Work Item
+                </ng-template>
+                <button type="button" class="float-right" mat-button mat-raised-button color='primary'
+                  (click)='openDialog()'>Add</button>
+                <h5 class="text-secondary"> Work Item Field Templates</h5>
+                <mat-table [dataSource]="dataSource" matSort id="CloneTableRow">
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="Field Template Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Field Template Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Field Template Name"> {{element.templateName}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="Description">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Description"> {{element.description}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="Is Active">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Is Active</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Is Active">
+                      <mat-checkbox [checked]=element.templateFlag></mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit(element)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <!-- <mat-paginator [pageSizefieldForm]="[5, 10, 25, 100]"></mat-paginator> -->
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">supervised_user_circle</mat-icon>
+                  Projects, Customers, Contacts, Work Logs Field Templates
+                </ng-template>
+                <h4 class="text-secondary">Projects, Customers, Contacts, Work Logs Field Templates</h4>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<ng-template #matdialog class="resp">
+  <div class="res">
+    <div id="mat-header">
+      <a><i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+          style="cursor: pointer; color: red;"></i></a>
+      <h1 mat-dialog-title>{{dialogTitle}} Custom Field Templates</h1>
+    </div>
+    <mat-dialog-content>
+      <div class="container">
+
+          <form class="example-container" [formGroup]="templateForm" [style.fontSize.px]="getFontSize()">
+            <div class="row col-sm-12 col-md-12 col-lg-12">
+            <div class="col-lg-6 col-md-6">
+              <mat-form-field [color]="color">
+                <input matInput type="text" placeholder="Field Label" formControlName="templateName">
+                <!-- <mat-error *ngIf="templateForm.get('templateName')"></mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <mat-form-field>
+                <input matInput type="text" placeholder="Field Label" formControlName="description">
+              </mat-form-field>
+            </div>
+          </div>
+          </form>
+
+        <div class="row col-sm-12 col-md-12 col-lg-12">
+          <div class="col-lg-4 bg-info">
+            <div class="example-container">
+              <h6>Field List</h6>
+              <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="fieldsList"
+                [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of fieldsList" cdkDrag>{{item.fieldlabel}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 bg-default">
+            <div class="example-container">
+              <h6>Forms</h6>
+              <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="templateFieldsList"
+                [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
+
+                <form [innerHTML]="inputpdf">
+                    <!-- <span [innerHTML]="inputpdf"></span> -->
+                  <div class="example-box" *ngFor="let item of templateFieldsList" cdkDrag >
+                      <!-- <p [innerHTML]="(item.attribute)"></p> -->
+                      <!-- <div class="form-group">
+                        <label class="text-info">label</label>
+                        <div [innerHTML]="inputpdf"></div>
+                      </div> -->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions id="mat-footer">
+      <button type='submit' mat-button mat-button mat-raised-button color='primary'
+        (click)='onFieldTemplateSave()'>Save</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

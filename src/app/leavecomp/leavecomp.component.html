@@ -1,0 +1,363 @@
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="container-fluid">
+
+  <div class="row" *ngIf="role != 'HR'">
+    <div class="col-xl-3 col-md-6 mb-4 col-xs-6">
+      <div class="card bg-gradient-danger border-left-primary shadow h-100 py-2 heading-footer">
+
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2" style="text-align: center;font-size: 10px;">
+
+            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Balance Leave 10</div>
+            <div class="col mr-2" style="text-align: center;font-size: 10px;">
+
+              <div class="h5 font-weight-bold text-gray-800"></div>
+              <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer"
+                (click)=" openDialogWithoutRef('SickLeave') ">
+                <h6>Sick&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>3/10</span></h6>
+              </div>
+              <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer"
+                (click)=" openDialogWithoutRef('Casual')">
+                Casual <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3/10</span>
+              </div>
+              <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer"
+                (click)=" openDialogWithoutRef('Emergency')">
+                Emergency <span>&nbsp;4/10</span>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4 col-xs-6">
+      <div class="card border-left-primary shadow h-100 py-2 heading-footer">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2" style="text-align: center;font-size: 10px;">
+
+            <div class="h5 font-weight-bold text-gray-800">Total Requested 06</div>
+            <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer" (click)="navigateTab1('Approved')">
+              <h6> Approved Request <span>2/6</span></h6>
+            </div>
+            <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer" (click)="navigateTab('Pending')">
+              Pending Request <span>&nbsp;3/6</span>
+            </div>
+            <div class="text-sm font-weight-bold text-uppercase mb-1 cursor-pointer" (click)="navigateTab('Cancelled')">
+              Cancel Request <span>&nbsp;1/6</span>
+            </div>
+
+          </div>
+          <div class="col-auto"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-body">
+      <div class="mat-tab">
+        <mat-tab-group class="res" #selectedTab>
+
+          <mat-tab label="Leaves" *ngIf="role != 'HR'">
+            <div class="example-container mat-elevation-z8">
+              <div class="">
+                <mat-form-field>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+
+                </mat-form-field>&nbsp;&nbsp;
+                <mat-form-field>
+                  <mat-label>Status filter</mat-label>
+                  <mat-select (ngModelChange)="selectedFilter($event.value)">
+                    <mat-option *ngFor="let food of arr" [value]="food.leaveId">
+                      {{food.lTypeName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button mat-button mat-raised-button color='primary' class="float-right mt-2" type="button"
+                  (click)="addDialog()">Add Leave</button>
+              </div>
+
+
+              <div>
+                <mat-table [dataSource]="dataSource" class="res material-table-scroll">
+                  <ng-container matColumnDef="leaveType">
+                    <mat-header-cell *matHeaderCellDef> LeaveType </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="leaveType">
+                      {{row.leaveType}}
+
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="startDate">
+                    <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="startDate"> {{row.startDate | date:'dd-MM-yyyy'}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="endDate">
+                    <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="endDate"> {{row.endDate | date:'dd-MM-yyyy'}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="numberofDays">
+                    <mat-header-cell *matHeaderCellDef> Days </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="numberofDays">
+                      {{row.numberofDays}}
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="requesterComments">
+                    <mat-header-cell *matHeaderCellDef> Reasons </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="requesterComments"> {{row.requesterComments}}
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="leaveStatus">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="leaveStatus"> {{row.leaveStatus}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="Action">
+
+                      <a><i class="pi pi-user-edit" (click)="openedit(row)"></i></a>
+
+                      <a><i class="pi pi-trash" style="cursor: pointer;" (click)="confirmDelete(row)"></i></a>
+
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;">
+                  </mat-row>
+                </mat-table>
+
+                <!-- <mat-paginator #paginator [pageSizeOptions]="[ 5,10, 25, 100]"></mat-paginator> -->
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Requests">
+            <div class="example-container mat-elevation-z8">
+              <div>
+                <mat-form-field class="row col-sm-12">
+                  <input matInput class="row col-sm-12" (keyup)="applyFilter1($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+                <i (click)="refresh()" class="fas fa-sync float-right mt-2"></i>
+              </div>
+              <mat-table [dataSource]="requestDataSource" class="res">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> UserId </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="id">
+                    {{row.id}}
+
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="leaveType">
+                  <mat-header-cell *matHeaderCellDef> LeaveType </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="leaveType">
+                    {{row.leaveType}}
+
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="startDate">
+                  <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="startDate"> {{row.startDate | date:'dd-MM-yyyy'}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="endDate">
+                  <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="endDate"> {{row.endDate | date:'dd-MM-yyyy'}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="numberofDays">
+                  <mat-header-cell *matHeaderCellDef> Days </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="numberofDays"> {{row.numberofDays}}</mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="requesterComments">
+                    <mat-header-cell *matHeaderCellDef> Reasons </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="requesterComments"> {{row.requesterComments}} </mat-cell>
+                  </ng-container> -->
+                <ng-container matColumnDef="approverComments">
+                  <mat-header-cell *matHeaderCellDef>Comments </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="approverComments"> {{row.approverComments}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="leaveStatus">
+                  <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="leaveStatus"> {{row.leaveStatus}} </mat-cell>
+                </ng-container>
+
+
+                <!-- <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="Action">
+
+
+                    </mat-cell>
+                  </ng-container> -->
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label="Action">
+                    <mat-select [(placeholder)]="row.leaveStatus">
+                      <mat-option *ngFor="let item of checkstatus" [value]="item.name"
+                        (click)="openDialogforApproveCancelReq(item.id,row.id)">
+
+                        {{item.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumnsForRequests"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsForRequests;">
+                </mat-row>
+
+              </mat-table>
+
+              <!-- <mat-paginator #paginator1 [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #matdialog #secondDialog>
+  <div class="container">
+    <div id="mat-header">
+      <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+        style="cursor: pointer; color: rgb(15, 15, 15);"></i>
+      <h1 mat-dialog-title><strong>Apply Leaves </strong> </h1>
+    </div>
+    <mat-dialog-content>
+      <form [formGroup]="taskreactive">
+
+
+
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label>LeaveType<span class="text-danger">*</span></label>
+          </div>
+            <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+             <!-- <mat-form-field>
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of arr" [value]="item.leaveId">
+                {{item.lTypeName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <td>
+            <select formControlName="leaveType" class="custom-select" (change)="checkLeaveType($event)">
+              <option *ngFor="let item of arr" [value]="item.leaveId">{{item.lTypeName}}</option>
+            </select>
+          </td>
+          </div>
+          <!-- <td>
+            <select formControlName="leaveType" class="custom-select">
+              <option *ngFor="let item of arr" [value]="item.leaveId">{{item.lTypeName}}</option>
+            </select>
+          </td> -->
+          <!-- <mat-form-field>
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let item of arr" [value]="item.leaveId">
+                {{item.lTypeName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        </div><br>
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label>RequesterComments<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
+            <textarea row='10' cols='40' formControlName="requesterComments" rows="4" id="comment"
+              placeholder="Reason for leave"></textarea>
+          </div>
+        </div><br>
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label>From<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field style="width: 165px;">
+              <input matInput [matDatepicker]="picker1" placeholder="" name="dates" [min]="minDate" [max]="today"
+                formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>&nbsp;&nbsp;
+            &nbsp;&nbsp;
+          </div>
+        </div><br>
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label>To<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <mat-form-field style="    width: 165px;">
+              <input matInput [matDatepicker]="picker2" placeholder=""  name="dates"
+                formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>&nbsp;&nbsp;
+          </div>
+        </div><br>
+
+        <!-- <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label>Days<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12" >
+            <input type="number" formControlName="numberofDays" [(ngModel)]="days" readonly="readonly">
+
+          </div>
+        </div><br> -->
+
+        <span></span>
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions id="mat-footer">
+      <button type="submit" mat-flat-button color="primary" (click)='onFormSubmit(taskreactive)'>Submit</button>
+      <button mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>
+
+
+
+<ng-template #cancel>
+  <div class="container">
+    <div id="mat-header">
+      <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+        style="cursor: pointer; color: rgb(15, 15, 15);"></i>
+      <h1 mat-dialog-title><strong>Comment</strong> </h1>
+    </div>
+    <mat-dialog-content>
+      <form [formGroup]="approveCancelReq">
+        <!-- <input type='text' formControlName='requesterComments' placeholder="Write comment "> -->
+        <textarea row='10' cols='40' formControlName="requesterComments" rows="5" placeholder="Comment here"></textarea>
+      </form>
+      <p *ngIf="errorLog" style="color: red;">Please enter the comment!</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions id="mat-footer" class="float">
+      <button type="submit" mat-flat-button color="primary" (click)='submitApproveCancel()'>Submit</button>
+      <button mat-button cdkFocusInitial (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>

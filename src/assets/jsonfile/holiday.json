@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+     "name": "New Year",
+      "dates": "1-1-2020",
+       "days": 1,
+       "location": 1
+  },
+  {
+    "id": 2,
+    "name": "Ugadi",
+     "dates": "2-11-2020",
+      "days": 1,
+      "location": 2
+  },
+  {
+    "id": 3, "name": "Ramzan", "dates": "3-15-2020", "days": 1, "location": 3
+  },
+  {
+    "id": 4, "name":" Ganesha Festival", "dates":" 4-21-2020", "days": 1, "location": 2
+  },
+  {
+    "id": 5, "name": "Independence day", "dates":" 5-31-2020", "days": 1, "location": 3
+  },
+  {
+    "id": 6, "name": "Republic Day", "dates": "6-11-2020", "days": 1, "location": 1
+  },
+  {
+    "id": 7, "name": "Dasara", "dates": "7-19-2020", "days": 1, "location": 2
+  },
+  {
+    "id": 8, "name": "Diwali", "dates": "8-1-2020", "days": 1, "location": 3
+  },
+  {
+    "id": 9, "name": "Good Friday", "dates": "9-25-2020",  "days": 1, "location": 1
+  },
+  {
+    "id": 10,  "name": "Christmas", "dates": "12-25-2020",  "days": 1, "location": 1
+  },
+  {
+    "id": 11,  "name":" Ganesha Festival", "dates": "4-21-2020",  "days": 1, "location": 2
+  },
+  {
+    "id": 12,  "name": "Independence day", "dates": "5-31-2020",  "days": 1, "location": 3
+  },
+  {
+    "id": 13,  "name": "Republic Day", "dates":" 6-11-2020",  "days": 1, "location": 1
+  },
+  {
+    "id": 14,  "name":" Dasara", "dates":" 7-19-2020",  "days": 1, "location": 2
+  }
+]

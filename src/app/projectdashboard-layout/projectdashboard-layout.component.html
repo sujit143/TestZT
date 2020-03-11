@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <!-- <div class="sidebar" data-color="white"> -->
+      <app-sidebar></app-sidebar>
+  <!-- </div> -->
+  <div class="main-panel">
+      <app-navbar></app-navbar>
+      <div id="body">
+        <h4 class="ml-3 font-light m-b-xs bg-white">{{title | titlecase }}</h4>
+      <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+  </div>
+</div>

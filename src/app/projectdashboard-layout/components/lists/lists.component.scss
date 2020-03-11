@@ -1,0 +1,288 @@
+mat-dialog-container#mat-dialog-2 {
+  /* margin-right: -46px; */
+  margin-left: 241px;
+  height: 1000px;
+}
+.maintitle {
+  margin-left: 501px;
+}
+
+mat-card.mat-card {
+  width: 540px;
+  height: auto;
+}
+
+button.btn.btn-secondary[_ngcontent-lcf-c10] {
+  margin-right: 405px;
+  float: right;
+}
+
+.mat-dialog-container {
+  display: block;
+  padding: 35px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
+  outline: 0;
+  width: 100%;
+  height: 120%;
+  min-height: inherit;
+  max-height: inherit;
+}
+table {
+  width: 70%;
+}
+mat-dialog-container#mat-dialog-1 {
+  height: 832px;
+}
+.mat-dialog-title {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  margin-top: 111px;
+  font-size: 25px;
+}
+
+
+
+@media screen and (max-width: 960px) {
+  mat-cell:first-of-type,
+  mat-footer-cell:first-of-type,
+  mat-header-cell:first-of-type {
+    padding-left: 0px;
+  }
+  .mat-table {
+    border: 0;
+    vertical-align: middle;
+  }
+  mat-footer-row,
+  mat-header-row,
+  mat-row {
+    display: none;
+  }
+  .mat-table caption {
+    font-size: 1em;
+  }
+  .mat-table .mat-row {
+    border-bottom: 10px solid #ddd;
+    display: block;
+  }
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: right;
+    font-weight: bold;
+    height: 30px;
+    margin-bottom: 4%;
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+  .mat-table .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 0.85em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+  .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+    margin-bottom: -52px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .maintitle {
+  
+      // margin-left: 33px;
+      margin-left: 123px;
+  }
+  }
+  @media (min-width: 768px) and (max-width: 959px) {
+    .maintitle {
+      margin-left: 126px;
+  }
+    }
+    @media (min-width: 961px) and (max-width: 991px) {
+      .maintitle {
+        margin-left: 140px;
+    }
+      }
+  
+
+      @media (min-width: 992px) and (max-width: 1023px) {
+        .maintitle {
+          margin-left: 100px;
+      }
+        }
+    
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+  mat-card.mat-card {
+    width: 330px;
+  }
+}
+
+
+@media (min-width: 767px) and (max-width: 1024px) {
+  mat-card.mat-card {
+    width: 320px;
+  }
+}
+
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  mat-card.mat-card {
+    width: 320px;
+  }
+}
+@media (min-width: 1024) and (max-width: 1449) {
+  mat-card.mat-card {
+    width: 320px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+  h1#mat-dialog-title-0 {
+   
+    margin-left: -80px;
+  }
+}
+@media (min-width: 425px) and (max-width: 375px) {
+  mat-card.mat-card {
+    width: 320px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  mat-card.mat-card {
+    width: 330px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -478px;
+    
+  }
+}
+
+@media (min-width: 320px) and (max-width: 374px) {
+  mat-card.mat-card {
+    width: 320px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 374px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -85;
+  }
+}
+
+
+@media (min-width: 1440px) and (max-width: 2560px) {
+  mat-card.mat-card {
+    width: 540px;
+  }
+}
+
+@media (min-width: 1439px) and (max-width: 1460px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -475px;
+  }
+}
+
+@media (min-width: 1461px) and (max-width: 1523px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -435px;
+  }
+}
+@media (min-width: 1524px) and (max-width: 1622px) {
+  h1#mat-dialog-title-0 {
+    // margin-left: -435px;
+    margin-left: -385px;
+  }
+}
+@media (min-width: 1623px) and (max-width: 2384px) {
+  h1#mat-dialog-title-0 {
+    // margin-left: -385px;
+    margin-left: -260px;
+}
+  
+}
+@media (min-width: 2385px) and (max-width: 2560px) {
+  h1#mat-dialog-title-0 {
+    margin-left: 85px;
+}
+  
+}
+@media (min-width: 768px) and (max-width: 960px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -100px;
+}
+  
+}
+@media (min-width: 320px) and (max-width: 374px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -100px;
+}
+  
+}
+@media (min-width: 375px) and (max-width: 766px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -100px;
+}
+  
+}
+
+// @media (min-width: 1439px) and (max-width: 2560px) {
+//   h1#mat-dialog-title-0 {
+//     margin-left: -437px;
+//   }
+// }
+
+@media (min-width: 1400px) and (max-width: 1438px) {
+  h1#mat-dialog-title-0 {
+    margin-left: -477px;
+  }
+}
+
+// @media (min-width: 1461px) and (max-width: 1523) {
+//   h1#mat-dialog-title-0 {
+//     margin-left: -477px;
+//   }
+// }
+
+@media (min-width: 1400px) and (max-width: 1429px) {
+  mat-card.mat-card {
+    width: 510px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1399px) {
+  mat-card.mat-card {
+    width: 360px;
+    // width: 430px;
+  }
+}
+
+
+
+.activeCls {
+
+  background-color: #7993c5 !important;
+  // border: 2px solid;
+}
+i.fas.fa-trash-alt {
+  margin-left: 5px;
+}
+.mat-header-cell.mat-sort-header-sorted {
+  color: black;
+}

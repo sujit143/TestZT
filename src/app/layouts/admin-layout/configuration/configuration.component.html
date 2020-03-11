@@ -1,0 +1,339 @@
+<p-toast [style]="{ marginTop: '80px' }"></p-toast>
+<div class="container-fluid">
+  <form [formGroup]="editForm" (ngSubmit)="onAddConfigure(editForm)">
+    <div class="row col-lg-12 col-md-12 col-sm-12" style="margin-top: 14px; padding-left: 13px;">
+      <input type="text" [disabled]="isDisabled" formControlName='name' value="New payment type">
+    </div>
+
+    <mat-tab-group>
+      <mat-tab label="Entitlement">
+
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Payment type</label>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='paymentTypes'>
+                <mat-option *ngFor="let item of payment" [(value)]="item.id">
+                  {{item.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Carry Forward %</label>
+
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='carryforwardpercentage'>
+                <mat-option *ngFor="let item of carryforword" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <span></span>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Accural</label>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <mat-form-field style=" width: 165px;">
+              <input matInput [matDatepicker]="picker1" placeholder="" name="dates"
+                (dateChange)="formatDate($event.value)" formControlName="accuralDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>&nbsp;&nbsp;
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Expires in</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='expiresinmonths'>
+                <mat-option *ngFor="let item of expiresin" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>Months
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Reset</label>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <mat-form-field style=" width: 165px;">
+              <input matInput [matDatepicker]="picker2" placeholder="" name="dates1" formControlName="resetDate">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>&nbsp;&nbsp;
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Encashment %</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='encashmentpercentage'>
+                <mat-option *ngFor="let item of encashment" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Total days per year</label>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='totalleavesperyear'>
+                <mat-option *ngFor="let item of totaldays" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Max continus leave allowed</label>
+          </div>
+          <div class="col-lg-2 col-md-4 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='maxcontinuousleave'>
+                <mat-option *ngFor="let item of maxleavesallowed" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="">
+          <hr>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Applicable">
+
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Gender</label>
+          </div>
+          <div class="rows col-lg-2 col-md-4 col-sm-12">
+            <mat-form-field>
+              <mat-select formControlName='genderids'>
+                <mat-option *ngFor="let item of gender" [(value)]="item.viewValue">
+                  {{item.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Department</label>
+          </div>
+          <div class="rows col-lg-2 col-md-4 col-sm-12">
+            <mat-form-field>
+
+              <mat-select formControlName="departmentids" multiple>
+                <mat-option *ngFor="let topping of arr1" [(value)]="topping.id">{{topping.description}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Designation</label>
+          </div>
+          <div class="rows col-lg-2 col-md-4 col-sm-12">
+
+
+            <mat-form-field>
+
+
+              <mat-select formControlName="designationids" multiple>
+                <mat-option *ngFor="let topping of arr3" [(value)]="topping.id">{{topping.description}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Location</label>
+          </div>
+          <div class="rows col-lg-2 col-md-4 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName="locationids" multiple>
+                <mat-option *ngFor="let topping of ListOfLocations" [(value)]="topping.id">{{topping.city}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <label>Role</label>
+          </div>
+          <div class="rows col-lg-2 col-md-4 col-sm-12">
+            <mat-form-field>
+              <mat-select formControlName="roleids" multiple>
+                <mat-option *ngFor="let topping of arr2" [(value)]="topping.id">{{topping.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="">
+          <hr>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Restriction">
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Weekends between leaves</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group1" (onClick)="Disable()"></p-radioButton> Do not count
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group1" (onClick)="showOnlyLinkedRisks()"></p-radioButton> Count after
+              days
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+
+            <mat-form-field *ngIf="!dispDropDown">
+              <mat-select formControlName='includeweekendsafterdays' disabled>
+                <mat-option *ngFor="let item of weekendsbetweenleaves" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="dispDropDown">
+              <mat-select formControlName='includeweekendsafterdays'>
+                <mat-option *ngFor="let item of weekendsbetweenleaves" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Holidays between leaves</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group2" (onClick)="Disablesecond()"></p-radioButton> Do not count
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group2" (onClick)="showOnlyLinkedRiskssecond()"></p-radioButton> Count
+              after days
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <mat-form-field *ngIf="!dispDropDownsecond">
+              <mat-select formControlName='includewholidaysafterdays' disabled>
+                <mat-option *ngFor="let item of holydaysbetweenleaves" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="dispDropDownsecond">
+              <mat-select formControlName='includewholidaysafterdays'>
+                <mat-option *ngFor="let item of holydaysbetweenleaves" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>While applying, exceed leave balance</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group3"></p-radioButton> Allow
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group3"></p-radioButton> Do not allow
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>
+              <p-radioButton class="radio" name="group3"></p-radioButton> Allow and consider as LOP
+            </label>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Allow half day</label>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <p-checkbox></p-checkbox>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Leave submit before</label>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-12">
+
+            <mat-form-field>
+              <mat-select formControlName='requestLeaveBeforeDays'>
+                <mat-option *ngFor="let item of leavesubmitfor" [(value)]="item.id">
+                  {{item.id}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-2 col-md-3 col-sm-12">
+            <label>Enable file upload</label>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <p-checkbox formControlName="EnableFileUpload"></p-checkbox>
+          </div>
+        </div>
+        <div class="">
+          <hr>
+          <p-footer class="button">
+            <button type="submit" mat-button mat-raised-button color='primary'>Submit</button>
+            <button type="button" pButton icon="pi pi-close" label="Cancel" class="ui-button-secondary"></button>
+          </p-footer>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>

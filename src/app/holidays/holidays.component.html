@@ -1,0 +1,127 @@
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<div class="container-fluid">
+
+  <div class="card">
+    <div class="card-body">
+      <mat-tab-group>
+        <mat-tab label="All Holidays">
+          <div class="row mt-2">
+            <label class="mt-4 ml-xs-1 ml-4">Select Location</label>
+            <div class="col-sm-3 col-lg-6 pl-5">
+              <mat-form-field>
+                <mat-select [(ngModel)]="selectedLocation" (ngModelChange)="changeTableContent()">
+                  <mat-option *ngFor="let Locations of locations" [(value)]="Locations.id">
+                    {{Locations.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>&nbsp;&nbsp;
+            </div>
+            <div class=" col-lg-5" style="text-align:right">
+              <button mat-raised-button color="primary" (click)='showDialogToAdd("Add")'> Add Holiday</button>
+            </div>
+          </div>
+          <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+          <mat-table [dataSource]="selected_Array1" class="mat-elevation-z8 table "
+            style="padding-left: 5px;padding-right: 5px;" cdkTrapFocus >
+
+            <ng-container cdkColumnDef="name">
+              <mat-header-cell *cdkHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="name"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="dates">
+              <mat-header-cell *cdkHeaderCellDef> Date</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="dates"> {{element.dates}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="days">
+              <mat-header-cell *cdkHeaderCellDef> Days </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="days"> {{element.days}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="Actions">
+              <mat-header-cell *cdkHeaderCellDef>Actions </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="Actions">
+                <a><i class="fas fa-pencil-alt" (click)='showDialogToEdit("Edit",element)'
+                    style="cursor: pointer;"></i></a>
+                 <a><i class="fas fa-trash-alt" (click)='confirmDelete( element)' style="cursor: pointer;"></i></a>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </mat-tab>
+
+        <mat-tab label="My Holidays">
+          <mat-table [dataSource]="dataSource1" class=" table1 mat-elevation-z8"
+            style="padding-left: 5px;padding-right: 5px;">
+            <ng-container cdkColumnDef="name">
+              <mat-header-cell *cdkHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="name"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="dates">
+              <mat-header-cell *cdkHeaderCellDef> Date </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="dates"> {{element.dates}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="days">
+              <mat-header-cell *cdkHeaderCellDef> Days </mat-header-cell>
+              <mat-cell *cdkCellDef="let element" data-label="days"> {{element.days}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
+          </mat-table>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  <ng-template #matdialog >
+    <div id="mat-header"  >
+      <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+        style="cursor: pointer; color: red;"></i>
+      <h1 mat-dialog-title> {{dialogTitle}} Holiday</h1>
+    </div>
+    <mat-dialog-content>
+      <form [formGroup]="holidayForm">
+
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <label>Name<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-5 col-md-4 col-sm-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="" name="name" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <label>Date<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <mat-form-field style="    width: 165px;">
+              <input matInput [matDatepicker]="picker1" placeholder="" name="dates" formControlName="dates">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>&nbsp;&nbsp;
+          </div>
+        </div>
+        <div class="row col-lg-12 col-md-12 col-sm-12">
+          <div class="col-lg-3 col-md-4 col-sm-12">
+            <label>Days<span class="text-danger">*</span></label>
+          </div>
+          <div class="col-lg-5 col-md-4 col-sm-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="" name="days" formControlName="days" type="text" maxlength="3" >
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" id="mat-footer">
+      <button type="submit" mat-raised-button color="primary" (click)='onFormSubmit()'>Submit</button>
+    </mat-dialog-actions>
+  </ng-template>

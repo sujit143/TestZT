@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "label": "Gap Inc.",
+      "data": "Gap Inc",
+
+      "children": [
+        { "label": "Banana Republic", "data": "Banana Republic" },
+        { "label": "Gap", "data": "Gap " },
+        { "label": "Hill City", "data": "Hill City" },
+        { "label": "Old Navy", "data": "Old Navy" }
+      ]
+    },
+    {
+      "label": "Home Depot",
+      "data": "Home Depot"
+    },
+    {
+      "label": "TJX",
+      "data": "TJX Companies",
+
+      "children": [
+        { "label": "TJ Maxx", "data": "TJ Maxx " },
+        { "label": "Marshalls", "data": "Marshalls" },
+        { "label": "Home Goods", "data": "Home Goods" }
+      ]
+    },
+    {
+      "label": "Target",
+      "data": "target"
+    }
+  ]
+}

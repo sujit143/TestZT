@@ -1,0 +1,17 @@
+.navbar a.dropdown-item {
+  color: #3a3636;;
+}
+#body {
+  padding-top: 33px;
+ // padding:10px;
+ padding-bottom:60px;   /* Height of the footer */
+}
+
+i{
+padding: 6px;
+}
+@media screen and(max-width:991px) {
+  .navbar a.dropdown-item{
+    color: #eaeef1;
+  }
+}

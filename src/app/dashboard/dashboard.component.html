@@ -1,0 +1,274 @@
+<div class="container-fluid">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12 col-md-6 col-sm-12 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-10 col-lg-8 col-md-10 col-sm-8 col-xl-8">
+                    <h5 class="dashboard-card-title">MY DEPARTMENT(S)</h5>
+                  </div>
+                  <div class="col-2 col-lg-4 col-md-2 col-sm-4 col-xl-4"><i class="fa fa-tv fa-2x"></i></div>
+                </div>
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-12">
+                    <h5 class="dashboard-card-title"><strong>{{ arrdept?.name }}</strong></h5>
+                  </div>
+                </div>
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-12">
+                    <small>
+                      You are currently associated to 2
+                      <span>department. <a href="#"><u>Know more</u></a>about this department.
+                      </span> department(s).
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-sm-12 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-10 col-lg-8 col-md-10 col-sm-8 col-xl-8">
+                    <h5 class="dashboard-card-title">MY MANAGER</h5>
+                  </div>
+                  <div class="col-2 col-lg-4 col-md-2 col-sm-4 col-xl-4">
+                    <i class="fa fa-random fa-2x"></i>
+                  </div>
+                </div>
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-12">
+                    <h5 class="dashboard-card-title"><strong>{{ arrlogin?.reportingManager }}ReportingManager</strong>
+                    </h5>
+                  </div>
+                </div>
+                <div class="row card-title-row col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+                  <div class="col-12">
+                    <small>You are reporting to . <a href="#"><u>Know more</u></a> about your manager.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-12 col-sm-12 col-xl-6">
+          <div class="card">
+            <div class="card-body" id="custom-card-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th><strong>Leave / Vacation Type</strong> </th>
+                      <th><strong>Requested Date</strong> </th>
+                      <th><strong>Applied for</strong> </th>
+                      <th><strong>Status</strong> </th>
+                      <th><strong>Sent</strong> </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="text-info thick">Earned Leave</span>
+                      </td>
+                      <td>Aug 25, 2014</td>
+                      <td>Sept 7, 2014</td>
+                      <td>Pending</td>
+                      <td>Othon Mourkakos</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="text-info thick">Sick Leave</span>
+                      </td>
+                      <td>Jul 14, 2013</td>
+                      <td>Jul 27, 2013</td>
+                      <td>Approved</td>
+                      <td>Othon Mourkakos</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="text-info thick">Sick Leave</span>
+                      </td>
+                      <td>Jan 1, 2013</td>
+                      <td>Jan 1, 2013</td>
+                      <td>Approved</td>
+                      <td>Othon Mourkakos</td>
+                    </tr>
+                    <tr>
+                      <td colspan="5">
+                        <a href="#"> Know More</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ------- expansion pannel -------- -->
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Information
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="panel-body" style="display: block;">
+        <div class="scrollit">
+          <table class="table table-striped table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <div>
+                    <strong class="formlabel">First Name</strong><br>
+                    <h5 class="data">{{ arrlogin?.firstName }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Last Name</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.lastName }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>DOB</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.dob }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Gender</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.gender }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>DOJ</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.doj }}</h5>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Address1</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.address }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Address2</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.address }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>City</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.city }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>State</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.state }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Country</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.country }}</h5>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Race</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.race }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Ethnicity</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.ethnicity }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Marital Status</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.maritalStatus }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Language</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.language }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>SSN</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.ssn }}</h5>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Email</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.email }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel"><strong>Cell Phone</strong></strong><br />
+                    <h5 class="data">{{ arrlogin?.cell }}</h5>
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <strong class="formlabel">Home Phone</strong><br />
+                    <h5 class="data">{{ arrlogin?.homePhone }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel">Work Phone</strong><br />
+                    <h5 class="data">{{ arrlogin?.workPhone }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <strong class="formlabel">Extension</strong><br />
+                    <h5 class="data">{{ arrlogin?.workPhoneExt }}</h5>
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

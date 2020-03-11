@@ -1,0 +1,32 @@
+.mat-elevation-z8{
+    padding: 20px;
+  }
+  
+  i{
+    font-size: 1.5em;
+    margin: 0px 5px;
+    cursor: pointer;
+  }
+  
+  i:hover{
+    font-size: 2em;
+  }
+  
+  .fa-pencil-square-o{
+    color:#2980b9;
+  }
+  
+  .fa-trash-o{
+    color:#c0392b;
+  }
+
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  

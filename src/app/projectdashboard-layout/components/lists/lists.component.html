@@ -1,0 +1,132 @@
+
+<div class="container-fluid">
+  <div class="maintitle">
+   <h1 mat-dialog-title><b>Manage List</b></h1>
+ </div>
+   <div class="container">
+    <form>
+         <div class="row">
+           <div class="col">
+             <mat-card class="card1">
+ 
+               <button type="button"  mat-button  mat-button mat-raised-button color='primary' (click)='openAddListDialog("Add")'>List</button>
+ 
+               <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                 <ng-container matColumnDef="name">
+                   <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                   <mat-cell *matCellDef="let element; let i = index" data-label="name" style="cursor: pointer;" (click)="changeTableContent(element, i)"
+                   > {{element.name}} </mat-cell>
+                 </ng-container>
+ 
+                 <ng-container matColumnDef="action">
+                   <mat-header-cell *matHeaderCellDef > Actions </mat-header-cell>
+                   <mat-cell *matCellDef="let details" data-label="Actions">
+                     <a><i class="fas fa-pencil-alt" (click)='openListEdit("Edit",details)'></i></a>
+                    <a><i class="fas fa-trash-alt" (click)="confirmDelete(details)" style="cursor: pointer;"></i></a>
+                    <!-- <a><i class="fa fa-plus"></i></a> -->
+                   </mat-cell>
+                 </ng-container>
+ 
+                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                 <mat-row  *matRowDef="let row; columns: displayedColumns; let i = index" [ngClass]="{'activeCls': i == testId }"></mat-row>
+               </mat-table>
+             </mat-card>
+             <p-toast [style]="{marginTop: '80px'}"></p-toast>
+           </div>
+           <div class="col">
+             <mat-card class="card2">
+               <button type="button"  mat-button  mat-button mat-raised-button color='primary' (click)='openListValueDialog("Add")'>List Value</button>
+               <mat-table [dataSource]="selected_Array" class="mat-elevation-z8">
+ 
+ 
+                 <ng-container matColumnDef="name">
+                   <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                   <mat-cell *matCellDef="let element"  data-label="Name" style='cursor: pointer;'> {{element.Name}} </mat-cell>
+                 </ng-container>
+                 <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+                 <ng-container matColumnDef="action">
+                   <mat-header-cell *matHeaderCellDef> <b>Action</b> </mat-header-cell>
+                   <mat-cell *matCellDef="let details" data-label="Actions">
+ 
+                     <a><i class="fas fa-pencil-alt"
+                       (click)='openListValueEdit("Edit",details)'></i> </a>
+                    <a> <i class="fas fa-trash-alt" (click)="confirmDelete1(details)"></i></a>
+                   </mat-cell>
+                 </ng-container>
+                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+               </mat-table>
+             </mat-card>
+           </div>
+ 
+         </div>
+       </form>
+ 
+   </div>
+ 
+   <!--Adding List -->
+   <div class="container">
+     <ng-template #matdialog5>
+ 
+       <!-- <div id="mat-header">
+         <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+           ></i>
+       <h5>{{dialogTitle}} List</h5>
+       </div> -->
+      <a> <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+        ></i></a>
+       <h5><b>{{dialogTitle}} List </b></h5>
+ 
+       <div>
+ 
+         <form class="example-container" [formGroup]="listForm" (ngSubmit)='onListSave()'>
+ 
+           <mat-form-field>
+              <input matInput type="text" placeholder="List name" formControlName="name">
+             <mat-error *ngIf="listForm.get('name').hasError('required') && !listForm.get('name').pristine">Enter name</mat-error>
+           </mat-form-field>
+           &nbsp;&nbsp;&nbsp;
+ 
+           <div mat-dialog-actions>
+             <button [disabled]='!listForm.valid' mat-button  mat-button mat-raised-button color='primary'>Save</button>
+             <button mat-button mat-dialog-close>Cancel</button>
+           </div>
+         </form>
+       </div>
+     </ng-template>
+   </div>
+ 
+ 
+ 
+ 
+   <!--Adding List Value-->
+   <div class="container">
+     <ng-template #matdialog6>
+ 
+       <a><i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+         style="cursor: pointer; color:black;"></i></a>
+       <h5> <b>{{dialogTitle}} List Value</b></h5>
+ 
+       <div>
+         <form class="example-container" [formGroup]="listForm" (ngSubmit)='onListValueSave()'>
+ 
+           <mat-form-field>
+              <input matInput type="text" placeholder="List Value" formControlName="name">
+             <label *ngIf="listForm.get('name').hasError('required') && !listForm.get('name').pristine"></label>
+           </mat-form-field>
+           &nbsp;&nbsp;&nbsp;
+ 
+           <div mat-dialog-actions>
+             <button [disabled]='!listForm.valid'  mat-button  mat-button mat-raised-button color='primary'>Save</button>
+             <button mat-button mat-dialog-close>Cancel</button>
+           </div>
+         </form>
+       </div>
+     </ng-template>
+   </div>
+ 
+ 
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+ </div>
+ 

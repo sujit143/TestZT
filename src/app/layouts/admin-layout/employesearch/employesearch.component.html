@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="design">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <mat-form-field class="design1">
+        <mat-label> Select Locations</mat-label>
+        <mat-select [(ngModel)]="selectedLocation" (ngModelChange)="changeTableContent()">
+          <mat-option *ngFor="let Locations of location" [value]="Locations.id" [(value)]="selected_Array">
+            {{Locations.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-table [dataSource]="selected_Array" class="mat-elevation-z8 table1">
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element" data-label="Name"> {{element.Name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="showDialogToAdd(element)">View Details</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+
+<ng-template #matdialog>
+  <div id="mat-header">
+    <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+      style="cursor: pointer; color: red;"></i>
+    <h1 mat-dialog-title>Employee Leave Details</h1>
+  </div>
+
+  <div>
+    <ul>
+      <li>
+        <mat-label style="font-size: 22px;">
+          Total Leaves {{totalleaves}}
+        </mat-label>
+      </li>
+      <li>
+        <mat-label style="font-size: 22px;">
+          Earned Leaves {{ernedleaves}}
+        </mat-label>
+      </li>
+      <li>
+        <mat-label style="font-size: 22px;" >
+          Leaves Used {{leavesused}}
+        </mat-label>
+      </li>
+      <li>
+        <mat-label style="font-size: 22px;">
+          Sick Leaves {{sickleaves}}
+        </mat-label>
+      </li>
+      <li>
+        <mat-label style="font-size: 22px;">
+          Casual Leaves {{casualleaves}}
+        </mat-label>
+      </li>
+    </ul>
+
+  </div>
+</ng-template>

@@ -1,0 +1,309 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="container-fluid">
+  <h4>Manage Custom Fields</h4>
+  <!-- <div class="col-md-8" style="margin-top: 10px;">
+  </div> -->
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-tab">
+            <mat-tab-group>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">work</mat-icon>
+                  Work Item
+                </ng-template>
+                <button type="button" class="float-right mt-2"  mat-button mat-raised-button color='primary'
+                (click)='openDialog("Add")'>Add</button>
+                <h5 class="text-secondary"> Work Items Custom Fields</h5>
+                <mat-table [dataSource]="dataSource" matSort id="CloneTableRow">
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="Field Label">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Field Label </mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Field Label"> {{element.fieldlabel}}</mat-cell>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="Field Type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Field Type </mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Field Type"> {{element.fieldtype}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="Format">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Format</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Format"> {{element.format}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+                <!-- <mat-paginator [pageSizefieldForm]="[5, 10, 25, 100]"></mat-paginator> -->
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">supervised_user_circle</mat-icon>
+                  Customers
+                </ng-template>
+                <div class="float-right mt-2">
+                  <button type="button" class="mr-2"  mat-button mat-raised-button color='primary'
+                  (click)='openDialog("Add")'>Add</button>
+                  <button type="button" mat-button mat-raised-button color='primary' [routerLink]="['../fieldtemplates']">
+                    Manage Field Layout</button>
+                </div>
+                <h5 class="text-secondary"> Customers Custom Fields</h5>
+                <mat-table [dataSource]="" matSort id="CloneTableRow">
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell> -->
+                    <h5 class="text-secondary text-center"> There are no custom fields for Customers</h5>
+                  </ng-container>
+
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="Field Label">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Field Label </mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="Field Label"> {{element.fieldlabel}}</mat-cell> -->
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="Field Type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Field Type </mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="Field Type"> {{element.fieldtype}} </mat-cell> -->
+                  </ng-container>
+
+                  <!-- Color Column -->
+                  <ng-container matColumnDef="Format">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Format</mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="Format"> {{element.format}} </mat-cell> -->
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+                <p class="text-info">There are no custom fields for Customers.</p>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">contacts</mat-icon>
+                  Contacts
+                </ng-template>
+                <div class="float-right mt-2">
+                  <button type="button" class="mr-2" mat-button mat-raised-button color='primary'>Add</button>
+                <button type="button" mat-button mat-raised-button color='primary' [routerLink]="['../fieldtemplates']">Manage
+                  Field Layout</button>
+                </div>
+                  <h5 class="text-secondary"> Contacts Custom Fields</h5>
+                  <mat-table [dataSource]="" matSort id="CloneTableRow">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell> -->
+                      <h5 class="text-secondary text-center"> There are no custom fields for Contacts</h5>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="Field Label">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Field Label </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Label"> {{element.fieldlabel}}</mat-cell> -->
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Field Type">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Field Type </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Type"> {{element.fieldtype}} </mat-cell> -->
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="Format">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Format</mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Format"> {{element.format}} </mat-cell> -->
+                    </ng-container>
+
+                    <ng-container matColumnDef="Actions">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Actions">
+                        <a><i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i></a>
+                        <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <p class="text-info">There are no custom fields for Contacts.</p>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon>list</mat-icon>
+                  Projects
+                </ng-template>
+                <div class="float-right mt-2">
+                  <button type="button" class="mr-2" mat-button mat-raised-button color='primary'>Add</button>
+                  <button type="button" mat-button mat-raised-button color='primary' [routerLink]="['../fieldtemplates']">Manage
+                    Field Layout</button>
+                </div>
+                  <h5 class="text-secondary"> Projects Custom Fields</h5>
+                  <mat-table [dataSource]="" matSort id="CloneTableRow">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell> -->
+                      <h5 class="text-secondary text-center"> There are no custom fields for Customers</h5>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="Field Label">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Field Label </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Label"> {{element.fieldlabel}}</mat-cell> -->
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Field Type">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Field Type </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Type"> {{element.fieldtype}} </mat-cell> -->
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="Format">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Format</mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="Format"> {{element.format}} </mat-cell> -->
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <p class="text-info">There are no custom fields for Projects.</p>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon>bookmark</mat-icon>
+                  Work Logs
+                </ng-template>
+                <div class="float-right mt-2">
+                  <button type="button" class="mr-2" mat-button mat-raised-button color='primary'>Add</button>
+                  <button type="button" mat-button mat-raised-button color='primary' [routerLink]="['../fieldtemplates']">Manage
+                    Field Layout</button>
+                </div>
+                  <h5 class="text-secondary"> Work Logs Custom Fields</h5>
+                  <mat-table [dataSource]="" matSort id="CloneTableRow">
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> ID</mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="id"> {{element.id}} </mat-cell> -->
+                      <h5 class="text-secondary text-center"> There are no custom fields for Customers</h5>
+                    </ng-container>
+
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="Field Label">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Field Label </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Label"> {{element.fieldlabel}}</mat-cell> -->
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Field Type">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Field Type </mat-header-cell>
+                      <!-- <mat-cell *matCellDef="let element" data-label="Field Type"> {{element.fieldtype}} </mat-cell> -->
+                    </ng-container>
+
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="Format">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Format</mat-header-cell>
+                    <!-- <mat-cell *matCellDef="let element" data-label="Format"> {{element.format}} </mat-cell> -->
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(element)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <p class="text-info">There are no custom fields for Work Logs.</p>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<ng-template #matdialog>
+  <div id="mat-header">
+    <a><i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+      style="cursor: pointer; color: red;"></i></a>
+      <h1 mat-dialog-title >{{dialogTitle}} Custom Fields</h1>
+  </div>
+  <mat-dialog-content>
+    <form class="example-container" [formGroup]="fieldForm" [style.fontSize.px]="getFontSize()">
+      <mat-form-field [color]="color">
+        <input matInput type="text" placeholder="Field Label" formControlName="fieldlabel">
+        <mat-error *ngIf="fieldForm.get('fontSize')?.invalid"></mat-error>
+      </mat-form-field>
+      <!-- &nbsp;&nbsp;&nbsp; -->
+      <mat-form-field>
+        <mat-select placeholder="Select Field Type" formControlName="fieldtype"
+          (ngModelChange)='onSelectedList(fieldForm.value.fieldtype)'>
+          <mat-option [value]='item.fieldName' *ngFor="let item of fieldCategory">{{item.fieldName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-group" *ngIf="listSelected">
+        <mat-form-field [color]="fieldForm.value.listvalue">
+          <mat-select placeholder="ListValue" formControlName="listvalue">
+            <mat-option [value]='item.id' *ngFor="let item of listCategory">{{item.listName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions id="mat-footer">
+    <button type='submit' mat-button mat-button mat-raised-button color='primary'
+      (click)='onFieldSave()'>Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</ng-template>

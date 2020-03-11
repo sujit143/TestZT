@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name" : "abhishek",
+    "role" : "admin",
+    "position": "Admin",
+    "username" : "admin123",
+    "password": "admin123",
+    "location": 1
+  },
+  {
+    "id": 2,
+    "name" : "ashwini",
+    "role" : "HR",
+    "position": "Human Resource",
+    "username" : "hr123",
+    "password": "hr123",
+    "location": 2
+  },
+  {
+    "id": 3,
+    "name" : "prabhu",
+    "role" : "manager",
+    "position": "Project Manager",
+    "username" : "manager",
+    "password": "manager",
+    "location": 3
+  },
+  {
+    "id": 4,
+    "name" : "sujit",
+    "role" : "user",
+    "position": "software engineer",
+    "username" : "user123",
+    "password": "user123",
+    "location": 2
+  }
+]

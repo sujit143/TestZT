@@ -1,0 +1,169 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="container-fluid">
+  <h4>Security Roles</h4>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-tab">
+            <mat-tab-group>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">info</mat-icon>
+                 Role Info
+                </ng-template>
+                <button type="button" class="float-right mt-2" mat-button mat-raised-button color='primary'
+                  (click)='openDialog()'>Add</button>
+                <h5 class="text-secondary">Security Roles</h5>
+                <mat-table [dataSource]="dataSource" matSort id="CloneTableRow" class="table scrollbar scrollbar-ripe-malinka">
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+                    <mat-cell *matCellDef="let role" data-label="id"> {{role.id}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let role" data-label="Name"> {{role.name}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Actions">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let role" data-label="Actions">
+                      <a><i class="fas fa-pencil-alt" (click)='openDialogEdit(role)'></i></a>
+                      <a><i class="far fa-copy" (click)='onClone(role)'></i></a>
+                      <a><i class="fas fa-trash-alt" (click)='confirmDelete(role)'></i></a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <!-- <mat-paginator [pageSizefieldForm]="[5, 10, 25, 100]"></mat-paginator> -->
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">file_copy</mat-icon>
+                  Project Privilages
+                </ng-template>
+             <!-- Angular Material Tree-Node Start -->
+                <div>
+                  <div class="row">
+                    <div class="col-6 border bg-secondary">
+                      <p><b>These Privilages</b></p>
+
+                      <mat-dialog-content class="scrollbar scrollbar-ripe-malinka">
+                      <app-projectprivilages1></app-projectprivilages1>
+                      </mat-dialog-content>
+
+                    </div>
+                    <div class="col-6 border bg-secondary" >
+                      <p><b>For These Projects</b></p>
+
+                      <mat-dialog-content class="scrollbar scrollbar-ripe-malinka">
+                      <app-projectprivilages2></app-projectprivilages2>
+                      </mat-dialog-content>
+
+                    </div>
+                  </div>
+                </div>
+               <!-- Angular Material Tree-Node End -->
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">accessibility</mat-icon>
+                  Administrator
+                </ng-template>
+                <!-- Angular Material Tree-Node Start -->
+                <div class="border bg-secondary">
+                <p><b>Apply These Administrative Privilages</b></p>
+              <mat-dialog-content class="scrollbar scrollbar-ripe-malinka">
+                <app-administrator></app-administrator>
+              </mat-dialog-content>
+                </div>
+                <!-- Angular Material Tree-Node End -->
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">report</mat-icon>
+                  Reports
+                </ng-template>
+               <!-- Angular Material Tree-Node Start -->
+                <div class="border bg-secondary">
+              <p><b>Apply These Report Privilages</b></p>
+              <mat-dialog-content>
+              <app-reports></app-reports>
+              </mat-dialog-content>
+                </div>
+                 <!-- Angular Material Tree-Node End -->
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="tab-icon">text_fields</mat-icon>
+                  Field Level
+                </ng-template>
+
+                <mat-tab-group>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <mat-icon class="tab-icon">work</mat-icon>
+                      Work Items
+                    </ng-template>
+              <!-- Angular Material Tree-Node Start -->
+                    <div class="border bg-secondary">
+              <mat-dialog-content>
+              <app-workitems></app-workitems>
+              </mat-dialog-content>
+                    </div>
+              <!-- Angular Material Tree-Node End -->
+                  </mat-tab>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <mat-icon class="tab-icon">payment</mat-icon>
+                      Tickets
+                    </ng-template>
+                    <h1>Six</h1>
+                  </mat-tab>
+                </mat-tab-group>
+              </mat-tab>
+              </mat-tab-group>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<ng-template #matdialog>
+  <div id="mat-header">
+    <a><i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();"
+        style="cursor: pointer; color: red;"></i></a>
+    <h1 mat-dialog-title>{{dialogTitle}} Security Roles</h1>
+  </div>
+  <mat-dialog-content>
+    <div class="container">
+      <form class="example-container" [formGroup]="secuForm" [style.fontSize.px]="getFontSize()">
+
+      <mat-form-field [color]="color">
+        <input matInput type="text" placeholder="Name" formControlName="name">
+        <mat-error *ngIf="secuForm.get('fontSize')?.invalid"></mat-error>
+      </mat-form-field>
+      </form>
+      </div>
+  </mat-dialog-content>
+  <mat-dialog-actions id="mat-footer">
+    <button class="float-right" type='submit' mat-button mat-button mat-raised-button color='primary'
+    (click)='onFieldTemplateSave()'>Save</button>
+  </mat-dialog-actions>
+</ng-template>
+

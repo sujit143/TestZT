@@ -1,0 +1,236 @@
+<div class="container-fluid">
+  <h5>Notifications</h5>
+  <!-- <div class="col-md-8" style="margin-top: 10px;">
+    <h3>Notifications</h3>
+  </div> -->
+  <div class="row">
+    <div class="col">
+          <!-- <h4 class="text-secondary"> Work Items Custom Fields</h4> -->
+          <!-- <button mat-raised-button (click)="openDialog()">Add</button> -->
+      <div class="col-md-8" style="margin-top: 10px;">
+      </div>
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <button type="button" class="float-right"  mat-button mat-raised-button color='primary' (click)='openDialog("")'>Add</button>
+      </div>
+      <mat-table [dataSource]="dataSource" matSort id="CloneTableRow">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            ID
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="id">
+            {{element.id}}
+          </mat-cell>
+        </ng-container>
+        <!-- Progress Column -->
+        <ng-container matColumnDef="Field Label">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Name
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Field Label">
+            {{element.fieldlabel}}
+          </mat-cell>
+        </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="Field Type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Change Type
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Field Type">
+            {{element.fieldtype}}
+          </mat-cell>
+        </ng-container>
+        <!-- Color Column -->
+        <ng-container matColumnDef="Format">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Is Active
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Format">
+            {{element.format}}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Actions
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Actions">
+            <a>
+              <i class="fas fa-pencil-alt" (click)='openDialogEdit("Edit",element)'></i>
+            </a>
+            <a>
+              <i class="far fa-copy" (click)='onClone(element)'></i>
+            </a>
+            <a>
+              <i class="fas fa-trash-alt" (click)='confirmDelete(element)'></i>
+            </a>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns sticky:true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+    </div>
+  </div>
+</div>
+
+<!-- <app-footer></app-footer> -->
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <ng-template #matdialog>
+    <div class="container-fluid">
+
+        <i matTooltip="Close" class="pi pi-times float-right" (click)="this.dialog.closeAll();" style="cursor: pointer; color: red;"></i>
+        <h1 mat-dialog-title>
+          {{dialogTitle}} Notifications
+          <!-- {{data.name}} -->
+        </h1>
+        <div class="row">
+        <mat-dialog-content>
+
+          <form class="example-container" [formGroup]="fieldForm" [style.fontSize.px]="getFontSize()" (ngSubmit)='onFieldSave()'>
+            <mat-form-field [color]="color">
+              <input matInput type="text" placeholder="Notification Name" formControlName="fieldlabel">
+              <mat-error *ngIf="fieldForm.get('fontSize')?.invalid"></mat-error>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+              <mat-select placeholder="Select Change Type" formControlName="fieldtype" >
+                <!-- (ngModelChange)='onSelectedList(fieldForm.value.fieldtype)' -->
+                <mat-option [value]='item.fieldName' *ngFor="let item of fieldCategory">
+                  {{item.fieldName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>&nbsp;&nbsp;&nbsp;
+            <mat-form-field>
+              <mat-select placeholder="Notification applies to" formControlName="fieldtype" >
+                <!-- (ngModelChange)='onSelectedList(fieldForm.value.fieldtype)' -->
+                <mat-option [value]='item.proName' *ngFor="let item of proCategory">
+                  {{item.proName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+            <h6>
+              When will this Notification run?
+            </h6>
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="1">When any field values are updated</mat-radio-button>&nbsp;&nbsp;&nbsp;
+              <mat-radio-button value="2">When specific field values are updated</mat-radio-button>
+            </mat-radio-group>
+
+            <div class="row">
+              <ng-container  cdkDropListGroup >
+                <div class="container" >
+              <div class="list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="todo" >
+                <div class="list-item"  cdkDrag *ngFor="let item of todo" >{{item}}</div>
+              </div>
+              </div>
+
+              <div class="container" >
+              <div class="list" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="done"  >
+                <div class="list-item" cdkDrag *ngFor="let item of done" >{{item}}</div>
+              </div>
+              </div>
+              </ng-container>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="container-fluid">
+                <mat-form-field>
+                  <mat-select placeholder="Fields" formControlName="fieldtype" >
+                    <!-- (ngModelChange)='onSelectedList(fieldForm.value.fieldtype)' -->
+                    <mat-option [value]='item.fName' *ngFor="let item of fCategory">
+                      {{item.fName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+                <div class="container-fluid">
+                  <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">Change to anything</mat-radio-button>&nbsp;&nbsp;&nbsp;
+                    <mat-radio-button value="2">Set To</mat-radio-button>&nbsp;&nbsp;&nbsp;
+                    <mat-radio-button value="3">Doesn't change</mat-radio-button>&nbsp;&nbsp;&nbsp;
+                    <mat-radio-button value="4">Changes from/to</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="container-fluid">
+                <mat-form-field>
+                  <mat-select placeholder="Priority" formControlName="fieldtype" >
+                    <!-- (ngModelChange)='onSelectedList(fieldForm.value.fieldtype)' -->
+                    <mat-option [value]='item.pName' *ngFor="let item of pCategory">
+                      {{item.pName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="container-fluid">
+              <button type='submit' mat-button mat-button mat-raised-button color='secondary'>Add Condition</button>
+            </div>
+            </div>
+              <div class="col-md-6">
+                <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button value="1">When any field values are updated</mat-radio-button>
+                  <mat-radio-button value="2">When specific field values are updated</mat-radio-button>
+                </mat-radio-group>
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                  <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+
+                  <!-- Position Column -->
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                  </ng-container>
+
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="field">
+                    <th mat-header-cell *matHeaderCellDef> Field </th>
+                    <td mat-cell *matCellDef="let element"> {{element.field}} </td>
+                  </ng-container>
+
+                  <!-- Weight Column -->
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> Description </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumn"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+                </table>
+              </div>
+            </div>
+
+<div class="container-fluid">
+  <h6>
+    Recipient
+  </h6>
+  <h6>
+    Enter the Names,Emails or Phone Number of the people that should be updated when this Notification is triggered
+  </h6>
+  <div class="container-fluid">
+  <form class="example-container" [formGroup]="fieldForm" [style.fontSize.px]="getFontSize()">
+    <mat-form-field [color]="color">
+      <input matInput type="text" placeholder="Add Recipient" formControlName="fieldlabel">
+      <mat-error *ngIf="fieldForm.get('fontSize')?.invalid"></mat-error>
+    </mat-form-field>&nbsp;&nbsp;&nbsp;
+       <div class="form-group"></div>
+  </form>
+</div>
+</div>
+<div class="container-fluid">
+<mat-dialog-actions id="mat-footer">
+  <button type='submit' [disabled]='fieldForm.invalid' mat-button mat-button mat-raised-button color='primary'
+    (click)='onFieldSave()'>Save</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+</div>
+
+</mat-dialog-content>
+</div>
+
+<!-- [disabled]='fieldForm.invalid' -->
